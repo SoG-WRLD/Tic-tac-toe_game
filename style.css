@@ -1,0 +1,302 @@
+:root {
+  --default-transition: all 0.5s ease;
+  font-family: Diphylleia, Cambria, Cochin, Georgia, Times, "Times New Roman",
+    serif;
+}
+[data-theme="dark"] {
+  --background-color: #101010;
+  --background-semi-vis: #10101080;
+  --background-color-highlight: #202020;
+  --text-color: #aad6ff;
+  --text-box: #20202080;
+  --main-color: #0040ff;
+  --main-color-highlight: #245bff;
+}
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --background-semi-vis: #a8a8a88e;
+  --background-color-highlight: #b3b3b3;
+  --text-box: #b3b3b380;
+  --main-color: #00c3ff;
+  --main-color-highlight: #43d3ff;
+}
+button:hover,
+#login:hover,
+input:hover {
+  box-shadow: 0px 0px 05px var(--main-color-highlight);
+}
+header {
+  width: 100vw;
+  height: 50px;
+  border-bottom: 3px double var(--main-color);
+  box-shadow: 0px 0px 5px var(--main-color-highlight);
+}
+header > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+header li::marker {
+  content: none;
+}
+header svg {
+  width: 50px;
+  height: 50px;
+}
+header input {
+  display: none;
+}
+header #toggle-theme:checked ~ .color-scheme {
+  transform: scaley(1);
+  transform: translateY(0);
+}
+header #toggle-theme:checked + svg {
+  fill: var(--main-color);
+}
+
+.color-scheme {
+  position: absolute;
+  background-color: var(--background-color);
+  top: 0;
+  right: 100px;
+  display: grid;
+  transform: scaley(0);
+  transform: translateY(-200px);
+  width: 340px;
+  height: 160px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
+  box-shadow: 0px 2px 5px var(--main-color-highlight);
+  align-items: start;
+  transition: var(--default-transition);
+}
+.color-scheme span {
+  display: inherit;
+  justify-items: center;
+}
+.color-scheme input {
+  display: none;
+}
+.color-scheme .label {
+  width: max-content;
+  font-size: 1.25em;
+  border-bottom: 2px solid var(--background-color-highlight);
+  border-radius: 1px;
+}
+.color-scheme > span > .button > svg {
+  width: 40px;
+  height: 40px;
+  fill: var(--background-color-highlight);
+  stroke: var(--background-color-highlight);
+  transform: rotateZ(0deg);
+  transition: var(--default-transition);
+}
+.color-scheme .button > input:checked + svg {
+  fill: var(--main-color);
+  stroke: var(--main-color);
+}
+
+.color-scheme .button > #default_svg #default-theme-path {
+  transform: rotateY(180deg);
+  transition: transform 0.75s ease-out;
+  transform-origin: center;
+}
+.color-scheme .button > input:checked + #default_svg #default-theme-path {
+  transform: rotateY(0deg);
+}
+.color-scheme .button > #light_svg #rays {
+  transition: transform 0.75s ease-out;
+  transform-origin: center;
+  transform: rotateZ(0deg);
+}
+.color-scheme .button > input:checked + #light_svg #rays {
+  transform: rotateZ(360deg);
+}
+
+.color-scheme .button > #dark_svg #moon {
+  transform: rotateZ(-220deg);
+  transition: transform 0.75s ease-out;
+  transform-origin: center;
+}
+.color-scheme .button > input:checked + #dark_svg #moon {
+  transform: rotateZ(0deg);
+}
+.color-scheme .button > #dark_svg #stars {
+  transform: scale(0, 0);
+}
+.color-scheme .button > input:checked + #dark_svg #stars {
+  transform: scale(1, 1);
+  animation: shake 1s ease-out;
+  transform-origin: center;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0px);
+  }
+  33% {
+    transform: translate(15px, 15px);
+  }
+  66% {
+    transform: translate(-10px, 15px);
+  }
+  100% {
+    transform: translate(0px);
+  }
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0px 8px 8px 0px;
+  height: 100vh;
+}
+
+.label {
+  font-size: 3em;
+  margin: auto;
+  width: max-content;
+}
+
+.field {
+  width: 480px;
+  height: 480px;
+  margin: auto;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.square {
+  border: 5px double var(--main-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.square p {
+  display: none;
+}
+.square:nth-child(1),
+.square:nth-child(2),
+.square:nth-child(3) {
+  border-top: 0px;
+}
+.square:nth-child(1),
+.square:nth-child(4),
+.square:nth-child(7) {
+  border-left: 0px;
+}
+.square:nth-child(3),
+.square:nth-child(6),
+.square:nth-child(9) {
+  border-right: 0px;
+}
+.square:nth-child(7),
+.square:nth-child(8),
+.square:nth-child(9) {
+  border-bottom: 0px;
+}
+.cross-piece,
+.circle-piece {
+  display: none;
+  width: 100px;
+  height: 100px;
+  /* margin: auto; */
+}
+.player {
+  font-size: 3em;
+  width: fit-content;
+  margin: auto;
+}
+.display {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+#circle-blur {
+  display: none;
+  filter: blur(2px);
+  stroke: #ffbf00;
+  stroke-width: 5px;
+}
+#cross-blur {
+  display: none;
+  filter: blur(2px);
+  stroke: #00bfff;
+  stroke-width: 5px;
+}
+#start-game {
+  display: none;
+}
+#start-text {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  margin: auto;
+}
+#start-label {
+  border: 3px double var(--main-color);
+  display: block;
+  width: 140px;
+  margin: auto;
+}
+.display #svg5356 {
+  width: 50px;
+  height: 50px;
+}
+.display #svg10172 {
+  width: 50px;
+  height: 50px;
+}
+#start-label {
+  display: flex;
+  width: 12em;
+  position: relative;
+  height: 2.5em;
+  border: 3px ridge var(--main-color);
+  outline: none;
+  background-color: transparent;
+  color: var(--text-color);
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#start-label::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: var(--background-color);
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+#start-label::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+  top: 80%;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: var(--background-color);
+  transition: 0.5s;
+}
+
+#start-game:checked + #start-label::before,
+#start-game:checked + #start-label::after,
+#start-label:hover::before,
+#start-label:hover::after {
+  transform: scale(0);
+}
+
+#start-label:hover,
+#start-game:checked + #start-label {
+  box-shadow: inset 0px 0px 25px var(--main-color-highlight);
+}
